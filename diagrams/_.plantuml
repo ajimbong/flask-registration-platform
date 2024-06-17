@@ -1,0 +1,48 @@
+@startuml
+
+|Student|
+start
+:Visit Platform;
+if (Has Account?) then (yes)
+    :Sign In;
+else (no)
+    :Sign Up;
+    :Sign In;
+endif
+:Welcome Screen;
+:View Programs;
+:Select Program;
+:View Program Details;
+if (Already Registered?) then (yes)
+    :Display Error;
+else (no)
+    :Register for Program;
+    :Upload Documents;
+    :Profile Page with Registration Status;
+endif
+:View Profile;
+if (Registration Verified?) then (yes)
+    :Make Payment;
+    :Payment Confirmation;
+endif
+stop
+
+|Admin|
+start
+:View Registrations;
+:Verify Documents;
+if (Documents OK?) then (yes)
+    :Accept Registration;
+else (no)
+    :Cancel Registration;
+endif
+:Manage Programs/Courses;
+if (Manage Programs) then
+    :Create/Update/Delete Program;
+endif
+if (Manage Courses) then
+    :Create/Update/Delete Course;
+endif
+stop
+
+@enduml

@@ -13,6 +13,10 @@ class Student(db.Model):
     matricule = db.Column(db.String(50), unique=True)
     password = db.Column(db.String(250), nullable=False)
 
+    registrations = db.relationship('Registration', backref='student', lazy=True)
+    registration_documents = db.relationship('RegistrationDocument', backref='student', lazy=True)
+    payments = db.relationship('Payment', backref='student', lazy=True)
+
     created_at = db.Column(db.DateTime, default=datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.now(), onupdate=datetime.now())
 
@@ -26,6 +30,9 @@ class Program(db.Model):
     tuition = db.Column(db.Float, nullable=False)
     description = db.Column(db.Text, nullable=False)
 
+    registrations = db.relationship('Registration', backref='program', lazy=True)
+    program_courses = db.relationship('ProgramCourse', backref='program', lazy=True)
+
     created_at = db.Column(db.DateTime, default=datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.now(), onupdate=datetime.now())
 
@@ -37,6 +44,8 @@ class Course(db.Model):
     name = db.Column(db.String(50), nullable=False)
     course_code = db.Column(db.String(50), nullable=False, unique=True)
     description = db.Column(db.Text, nullable=False)
+
+    program_courses = db.relationship('ProgramCourse', backref='course', lazy=True)
 
     created_at = db.Column(db.DateTime, default=datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.now(), onupdate=datetime.now())
@@ -50,6 +59,7 @@ class ProgramCourse(db.Model):
 
     created_at = db.Column(db.DateTime, default=datetime.now())
 
+
 class Registration(db.Model):
     __tablename__ = 'registration'
     id = db.Column(db.Integer, primary_key=True)
@@ -57,6 +67,9 @@ class Registration(db.Model):
     program_id = db.Column(db.Integer, db.ForeignKey('program.id'), nullable=False)
     verification_status = db.Column(db.String(50), nullable=False, default='PENDING')
     has_paid = db.Column(db.Boolean, nullable=False, default=False)
+
+    registration_documents = db.relationship('RegistrationDocument', backref='registration', lazy=True)
+    payments = db.relationship('Payment', backref='registration', lazy=True)
 
     created_at = db.Column(db.DateTime, default=datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.now(), onupdate=datetime.now())
@@ -84,7 +97,3 @@ class Payment(db.Model):
 
     created_at = db.Column(db.DateTime, default=datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.now(), onupdate=datetime.now())
-
-
-
-

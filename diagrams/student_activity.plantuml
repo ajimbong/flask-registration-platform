@@ -1,0 +1,27 @@
+@startuml
+start
+:Visit Platform;
+if (Has Account?) then (yes)
+    :Sign In;
+else (no)
+    :Sign Up;
+    :Sign In;
+endif
+:Welcome Screen;
+:View Programs;
+:Select Program;
+:View Program Details;
+if (Already Registered?) then (yes)
+    :Display Error;
+else (no)
+    :Register for Program;
+    :Upload Documents;
+    :Profile Page with Registration Status;
+endif
+:View Profile;
+if (Registration Verified?) then (yes)
+    :Make Payment;
+    :Payment Confirmation;
+endif
+stop
+@enduml

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <title>{{ program.name }}</title>
+</head>
+<body>
+    <h1>{{ program.name }}</h1>
+    <p>Department: {{ program.department }}</p>
+    <p>Tuition: {{ program.tuition }} CFA</p>
+    <p>{{ program.description }}</p>
+
+    <h2>Courses Offered</h2>
+    <ul>
+        {% for course in courses %}
+        <li>{{ course.name }} - {{ course.course_code }}</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ url_for('main.register_program', program_id=program.id) }}">Register for this Program</a>
+</body>
+</html>

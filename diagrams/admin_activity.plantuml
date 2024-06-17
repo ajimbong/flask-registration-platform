@@ -1,0 +1,18 @@
+@startuml
+start
+:View Registrations;
+:Verify Documents;
+if (Documents OK?) then (yes)
+    :Accept Registration;
+else (no)
+    :Cancel Registration;
+endif
+:Manage Programs/Courses;
+if (Manage Programs) then
+    :Create/Update/Delete Program;
+endif
+if (Manage Courses) then
+    :Create/Update/Delete Course;
+endif
+stop
+@enduml
