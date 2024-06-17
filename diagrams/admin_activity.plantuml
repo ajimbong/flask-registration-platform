@@ -1,18 +1,34 @@
 @startuml
+title Admin Activity
 start
-:View Registrations;
-:Verify Documents;
-if (Documents OK?) then (yes)
+:Login;
+fork
+  :View Registrations;
+  :Verify Documents;
+  if (Documents OK?) then (yes)
     :Accept Registration;
 else (no)
     :Cancel Registration;
 endif
-:Manage Programs/Courses;
-if (Manage Programs) then
-    :Create/Update/Delete Program;
-endif
-if (Manage Courses) then
-    :Create/Update/Delete Course;
-endif
+fork again
+  :View Programs;
+  fork
+  :Add Program;
+  fork again
+  :Update Program;
+  fork again
+  :Delete Program;
+  end fork
+fork again
+  :View Courses;
+  fork
+  :Add Course;
+  fork again
+  :Update Course;
+  fork again
+  :Delete Course;
+  end fork
+
+end fork
 stop
 @enduml

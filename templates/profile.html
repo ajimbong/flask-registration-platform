@@ -2,17 +2,65 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='school.css') }}"/>
+{#    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">#}
     <title>Profile</title>
 </head>
 <body>
+<div class="schoolSyst">
+        <div class="navBar">
+            <div class="logo">
+                <h2>SIANTOU <span>Institute</span></h2>
+            </div>
+            <div class="navElts">
+                <ul>
+                    <li><a href="{{ url_for('main.home') }}"> Home </a></li>
+                    <li><a href="#"> About </a></li>
+                    <li><a href="#"> Programs </a></li>
+                    {% if 'user_id' in session %}
+                        <li><a href="{{ url_for('main.profile') }}"> Profile </a></li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <div class="btns">
+                {% if 'user_id' in session %}
+                   <button class="logo"> <a href="{{ url_for('main.logout') }}">Logout</a> </button>
+                {% else %}
+                    <button class="register"><a href="{{ url_for('main.register') }}">Register</a></button>
+                    <button class="logo"><a href="{{ url_for('main.login') }}">Login</a></button>
+                {% endif %}
+            </div>
+        </div>
+
+<div class="headElt" style="height: fit-content">
     <h1>Profile of {{ student.first_name }} {{ student.last_name }}</h1>
-    <p>Email: {{ student.email }}</p>
+    <p><h6>Email:</h6>  {{ student.email }}</p>
+    {% if student.matricule %}
+        <p><h6>Matricule:</h6>  {{ student.matricule }}</p>
+    {% else %}
+        <p><h6>Matricule:</h6>  ...</p>
+    {% endif %}
     <h2>Registrations</h2>
-    <ul>
+    <ul style="display: flex; justify-content: center; align-items: center; flex-direction: column">
         {% for registration in registrations %}
-        <li>{{ registration.program.name }} - Status: {{ registration.verification_status }} - Paid: {{ 'Yes' if registration.has_paid else 'No' }}</li>
+            <li style="background-color: white; width: 30%; color: #1a73e8; margin-top: 10px; border-radius: 10px; padding-top: 15px">
+
+                    <h4> {{ registration.program.name }}</h4>
+                    <p style="color: #1a73e8">Status: {{ registration.verification_status }} - Paid: {{ 'Yes' if registration.has_paid else 'No' }}</p>
+                    <div class="">
+                        {% if registration.verification_status == "VERIFIED" and registration.has_paid == False %}
+                            <form method="post" action="{{ url_for('main.pay', registration_id=registration.id) }}">
+                                <button type="submit" style="color: white; background-color: #1a73e8">Pay</button>
+                            </form>
+                        {% endif %}
+                    </div>
+
+            </li>
+{#        <li>{{ registration.program.name }} - Status: {{ registration.verification_status }} - Paid: {{ 'Yes' if registration.has_paid else 'No' }}</li>#}
         {% endfor %}
     </ul>
+</div>
+
 </body>
 </html>

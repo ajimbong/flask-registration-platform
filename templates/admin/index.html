@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Home</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Registrations</h1>
+        <ul>
+            {% for registration in registrations.items %}
+            <li>
+                <a href="{{ url_for('admin.registration_detail', registration_id=registration.id) }}">
+                    {{ registration.student.first_name }} {{ registration.student.last_name }} - {{ registration.program.name }}
+                </a>
+                - Status: {{ registration.verification_status }}
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="pagination">
+            {% if registrations.has_prev %}
+                <a href="{{ url_for('admin.home', page=registrations.prev_num) }}">Previous</a>
+            {% endif %}
+            {% if registrations.has_next %}
+                <a href="{{ url_for('admin.home', page=registrations.next_num) }}">Next</a>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,4 +1,6 @@
 @startuml
+title Student Activity
+|Student|
 start
 :Visit Platform;
 if (Has Account?) then (yes)
@@ -11,16 +13,19 @@ endif
 :View Programs;
 :Select Program;
 :View Program Details;
+:Register for Program;
 if (Already Registered?) then (yes)
     :Display Error;
 else (no)
-    :Register for Program;
     :Upload Documents;
-    :Profile Page with Registration Status;
+    |Admin|
+    :Verify Registration;
+|Student|
 endif
+
 :View Profile;
 if (Registration Verified?) then (yes)
-    :Make Payment;
+    :Pay Registration Fee;
     :Payment Confirmation;
 endif
 stop

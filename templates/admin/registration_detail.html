@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Detail</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Registration Detail</h1>
+        <p>Student: {{ registration.student.first_name }} {{ registration.student.last_name }}</p>
+        <p>Program: {{ registration.program.name }}</p>
+        <p>Status: {{ registration.verification_status }}</p>
+
+        <h2>Documents</h2>
+        <ul>
+            {% for document in documents %}
+            <li><a href="/{{ document.document_link }}" target="_blank">Document {{ loop.index }}</a></li>
+            {% endfor %}
+        </ul>
+
+        <form method="post" action="{{ url_for('admin.accept_registration', registration_id=registration.id) }}">
+            <button type="submit">Accept</button>
+        </form>
+        <form method="post" action="{{ url_for('admin.decline_registration', registration_id=registration.id) }}">
+            <button type="submit">Decline</button>
+        </form>
+    </div>
+</body>
+</html>

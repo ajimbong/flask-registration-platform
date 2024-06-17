@@ -7,17 +7,21 @@
 </head>
 <body>
     <h1>{{ program.name }}</h1>
-    <p>Department: {{ program.department }}</p>
-    <p>Tuition: {{ program.tuition }} CFA</p>
+    <h3>Department: {{ program.department }}</h3>
+    <h3>Tuition: {{ program.tuition }} CFA</h3>
     <p>{{ program.description }}</p>
 
     <h2>Courses Offered</h2>
     <ul>
         {% for course in courses %}
-        <li>{{ course.name }} - {{ course.course_code }}</li>
+        <li>
+            <strong>{{ course.name }} - {{ course.course_code }}</strong>
+            <div> {{ course.description }}</div>
+        </li>
         {% endfor %}
     </ul>
 
-    <a href="{{ url_for('main.register_program', program_id=program.id) }}">Register for this Program</a>
+    <button style="width: fit-content"><a style="color: white" href="{{ url_for('main.register_program', program_id=program.id) }}">Register for this Program</a></button>
+<div style="margin-top: 100px"></div>
 </body>
 </html>

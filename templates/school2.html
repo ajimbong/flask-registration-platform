@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='school.css') }}"/>
+    <title>Document</title>
+</head>
+<body>
+    <div class="schoolSyst">
+        <div class="navBar">
+            <div class="logo">
+                <h2>SIANTOU <span>Institute</span></h2>
+            </div>
+            <div class="navElts">
+                <ul>
+                    <li><a href="#"> Home </a></li>
+                    <li><a href="#"> About </a></li>
+                    <li><a href="#"> Programs </a></li>
+                    {% if 'user_id' in session %}
+                        <li><a href="{{ url_for('main.profile') }}"> Profile </a></li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <div class="btns">
+                {% if 'user_id' in session %}
+                   <button class="logo"> <a href="{{ url_for('main.logout') }}">Logout</a> </button>
+                {% else %}
+                    <button class="register"><a href="{{ url_for('main.register') }}">Register</a></button>
+                    <button class="logo"><a href="{{ url_for('main.login') }}">Login</a></button>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="headElt">
+            <h2> Registration open for Year <br />2024 - 2025 </h2>
+            <p>From year1 to masters, levels are detetermined by the <br/> applicant documents and certficates by June 30th of the year</p>
+
+            <button class="register"><a href="">Registration</a></button>
+        </div>
+
+        <div class="img">
+            <img src="{{ url_for('static', filename='back3.jpg') }}">
+        </div>
+
+        <div class="AllCards">
+            <div class="teachHead"><h1>Bachelor Programs</h1>
+                <div class="mov">
+                    <button><</button>
+                    <button>></button>
+                </div>
+            </div>
+            <div class="teacher">
+                <a href="#" >
+                            <div class="cardsJob">
+                            <a href="{{ url_for('main.program_detail', program_id=programs[0].id) }}"><img src="{{ url_for('static', filename='swe.jpg') }}"/></a>
+                                <h2> {{ programs[0].name }}</h2>
+                                <p>{{ programs[0].description | truncate(120) }}</p>
+                                <div class="MoreInfo">
+                                    <p><strong>Department</strong> {{ programs[0].department }}</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="" ><div class="cardsJob">
+                            <a href="{{ url_for('main.program_detail', program_id=programs[1].id) }}"><img src="{{ url_for('static', filename='designer.jpeg') }}"/></a>
+                            <h2> {{ programs[1].name }} </h2>
+                            <p>{{ programs[1].description | truncate(120) }}</p>
+                            <div class="MoreInfo">
+                                <p><strong>Department</strong> {{ programs[1].department }}</p>
+                            </div>
+                        </div></a>
+                        <a href="" ><div class="cardsJob">
+                            <a href="{{ url_for('main.program_detail', program_id=programs[2].id) }}"><img src="{{ url_for('static', filename='agricEng.jpeg') }}"/></a>
+                            <h2> {{ programs[2].name }} </h2>
+                            <p>{{ programs[2].description | truncate(120) }}</p>
+                            <div class="MoreInfo">
+                                <p> <strong>Department</strong> {{ programs[2].department }}</p>
+                            </div>
+                        </div></a>
+                        <a href="" ><div class="cardsJob">
+                            <a href="{{ url_for('main.program_detail', program_id=programs[3].id) }}"><img src="{{ url_for('static', filename='marketer.jpeg') }}"/></a>
+                            <h2> {{ programs[3].name }} </h2>
+                            <p>{{ programs[3].description | truncate(120) }}</p>
+                            <div class="MoreInfo">
+                                <p><strong>Department</strong> {{ programs[3].department }}</p>
+                            </div>
+                        </div></a>
+            </div>
+        </div>
+    <div class="AllCards">
+            <div class="teachHead"><h1>Master Programs</h1>
+                <div class="mov">
+                    <button><</button>
+                    <button>></button>
+                </div>
+            </div>
+            <div class="teacher">
+                        <a href="#" >
+                            <div class="cardsJob">
+                            <a href="{{ url_for('main.program_detail', program_id=programs[4].id) }}"><img src="{{ url_for('static', filename='swe.jpg') }}"/></a>
+                                <h2> {{ programs[4].name }}</h2>
+                                <p>{{ programs[4].description | truncate(120) }}</p>
+                                <div class="MoreInfo">
+                                    <p><strong>Department</strong> {{ programs[4].department }}</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="" ><div class="cardsJob">
+                            <a href="{{ url_for('main.program_detail', program_id=programs[5].id) }}"><img src="{{ url_for('static', filename='designer.jpeg') }}"/></a>
+                            <h2> {{ programs[5].name }} </h2>
+                            <p>{{ programs[5].description | truncate(120) }}</p>
+                            <div class="MoreInfo">
+                                <p><strong>Department</strong> {{ programs[5].department }}</p>
+                            </div>
+                        </div></a>
+                        <a href="" ><div class="cardsJob">
+                            <a href="{{ url_for('main.program_detail', program_id=programs[6].id) }}"><img src="{{ url_for('static', filename='agricEng.jpeg') }}"/></a>
+                            <h2> {{ programs[6].name }} </h2>
+                            <p>{{ programs[6].description | truncate(120) }}</p>
+                            <div class="MoreInfo">
+                                <p> <strong>Department</strong> {{ programs[6].department }}</p>
+                            </div>
+                        </div></a>
+                        <a href="" ><div class="cardsJob">
+                            <a href="{{ url_for('main.program_detail', program_id=programs[7].id) }}"><img src="{{ url_for('static', filename='marketer.jpeg') }}"/></a>
+                            <h2> {{ programs[7].name }} </h2>
+                            <p>{{ programs[7].description | truncate(120) }}</p>
+                            <div class="MoreInfo">
+                                <p><strong>Department</strong> {{ programs[7].department }}</p>
+                            </div>
+                        </div></a>
+            </div>
+        </div>
+
+            <div class="bigNav">
+                <img src="{{ url_for('static', filename='img1.png') }}">
+                <div class="form">
+                    <form>
+                        <p> Create your account and have access to all our different specialties and their courses.</p>
+                        <input type="name" name="name" placeholder="Enter your name...">
+                        <input type="email" name="email" placeholder="Enter your email...">
+                        <input type="location" name="location" placeholder="Enter your location...">
+                        <input type="submit">
+                    </form>
+                </div>
+            </div>
+
+
+            <div class="part4">
+                <h2>Why choosing <span>US</span></h2>
+                <div class="line">
+                    <p></p>
+                </div>
+                <div class="new-card">
+                    <div class="icon">
+                        <img src="{{ url_for('static', filename='icon4.jpg') }}" alt="">
+                        <h4>Efficient</h4>
+                        <p> We are here to easy and facilitate this boring aspect of life.</p>
+                    </div>
+                    <div class="icon">
+                        <img src="{{ url_for('static', filename='student.jpeg') }}" alt="">
+                        <h4> Specialist </h4>
+                        <p> Our staff is made up of the best lecturers in the country</p>
+                    </div>
+                    <div class="icon">
+                        <img src="{{ url_for('static', filename='carpenter.jpeg') }}" alt="">
+                        <h4> Equiped </h4>
+                        <p> All the necessary and adequate instruments for every field are at our disposition</p>
+                    </div>
+                    <div class="icon">
+                        <img src="{{ url_for('static', filename='chtlogo.jpg') }}" alt="">
+                        <h4> Availability </h4>
+                        <p> We are here for you at any time and any where.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+</body>
+</html>

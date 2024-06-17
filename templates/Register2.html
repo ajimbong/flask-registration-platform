@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Register.css') }}">
+    <title>Register</title>
+</head>
+<body>
+    
+    <div class="navBar">
+        <div class="logo">
+            <h2>Siantou <span>Institute</span></h2>
+        </div>
+        <div class="navElts">
+            <ul>
+                <li><a href="{{ url_for('main.home') }}"> Home </a></li>
+                <li><a href="#"> About </a></li>
+                <li><a href="#"> Programs </a></li>
+            </ul>
+        </div>
+
+        <div class="btns">
+                {% if 'user_id' in session %}
+                   <button class="logo"> <a href="{{ url_for('main.logout') }}">Logout</a> </button>
+                {% else %}
+                    <button class="register"><a href="{{ url_for('main.register') }}">Register</a></button>
+                    <button class="logo"><a href="{{ url_for('main.login') }}">Login</a></button>
+                {% endif %}
+            </div>
+    </div>
+    <div class="formFormat">
+        <div class="img">
+            <img src="{{ url_for('static', filename='intergrity.jpg') }}">
+        </div>
+    <div class='form'>
+        <div>   <h2> Regsiter </h2> </div>
+            <form method="post" action="{{ url_for('main.register') }}">
+                <div>
+                    <input type="text" name="first_name" placeholder=" First Name...." />
+                </div>
+                <div>
+                    <input type="email" name="email" placeholder=" Email...." />
+                </div>
+                <div>
+                    <input type="text" name="last_name" placeholder=" Last Name..." required/>
+                </div>
+                <div>
+                    <input type="password" name="password" placeholder=" Password..." required />
+                </div>
+
+                <button type="submit" class="submit">Register</button>
+                <div>
+                    <input class="submit" type="hidden">
+                </div>
+
+
+                <div class='accnt'>
+                    <p> Already have an account? <a href="{{ url_for('main.login') }}"> Login </a></p>
+                </div>
+            </form>
+        </div>
+</body>
+</html>
